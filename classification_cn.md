@@ -30,13 +30,13 @@ permalink: /classification/
 
 **挑战**. 由于识别视觉概念（例如猫）的任务对于人类来说是相对微不足道的，所以从计算机视觉算法的角度考虑所涉及的挑战是值得的。正如我们在下面提出的一个无穷无尽的挑战列表，请记住图像的原始表示形式作为亮度值的三维阵列：
 
-- **角度变化**. 相对于相机，对象的单个实例可以以多种方式定向
-- **缩放变化**. 视觉物体通常在尺寸上有所不同（在现实世界中的尺寸，不仅仅是在图像范围上）
-- **变形**. 可将死板的对象以极端方式变形
-- **遮挡**. 感兴趣的对象可以被遮挡。有时只有一小部分对象（只有少数像素）可见
+- **角度变化**. 相机可能会从不同角度拍摄物体
+- **缩放变化**. 物体通常在尺寸上有所不同（在现实世界中的尺寸，不仅仅是在图像范围上）
+- **变形**. 物体以极端方式变形
+- **遮挡**. 物体可能被遮挡，有时只有一小部分对象（只有少数像素）可见
 - **照明条件**. 照明的效果在像素级上非常突出
-- **混淆背景**. 感兴趣的对象可能**融入**到他环境中，使他们很难辨认
-- **内部类型变化**. 感兴趣的物体通常可能比较宽泛，如椅子。这些对象有很多不同的类型，每个都有自己的外观
+- **混淆背景**. 物体可能**融入**到环境中，使他们很难辨认
+- **内部类型变化**. 物体类型概念可能比较宽泛，如椅子。这些对象有很多不同的类型，每个都有自己的外观
 
 对于这些变化，一个好的图像分类模型必须是稳定的，同时保持对类间变化的敏感性。
 
@@ -60,10 +60,10 @@ permalink: /classification/
 
 <a name='nn'></a>
 
-### Nearest Neighbor Classifier
-As our first approach, we will develop what we call a **Nearest Neighbor Classifier**. This classifier has nothing to do with Convolutional Neural Networks and it is very rarely used in practice, but it will allow us to get an idea about the basic approach to an image classification problem. 
+### 最近邻分类器
+作为我们的第一个方法，我们将开发我们所说的**最近邻分类器**。这个分类器与卷积神经网络无关，在实际中很少使用，但它可以让我们了解一个图像分类问题的基本方法。
 
-**Example image classification dataset: CIFAR-10.** One popular toy image classification dataset is the <a href="http://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10 dataset</a>. This dataset consists of 60,000 tiny images that are 32 pixels high and wide. Each image is labeled with one of 10 classes (for example *"airplane, automobile, bird, etc"*). These 60,000 images are partitioned into a training set of 50,000 images and a test set of 10,000 images. In the image below you can see 10 random example images from each one of the 10 classes:
+**示例图像分类数据集：CIFAR-10** 一个流行的图像分类数据集是<a href="http://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10 dataset</a>. 这个数据集由6万个细小的图像组成，这些图像高和宽都为32像素，共10类，每张图像都已经标注（例如“飞机，汽车，鸟”等）。这60000个图像被分割成50000个图像的训练集和10000个图像的测试集。在下面的图片中，您可以看到10类中每一类的随机10个示例图像：
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/nn.jpg">
