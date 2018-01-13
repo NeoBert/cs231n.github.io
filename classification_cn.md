@@ -1,62 +1,62 @@
----
+﻿---
 layout: page
 mathjax: true
 permalink: /classification/
 ---
 
-����һ�������ԵĽ�����ּ�ڽ��ܴӼ�����Ӿ���ͼ����������Լ����������ķ�����Ŀ¼��
+这是一个介绍性的讲座，旨在介绍从计算机视觉到图像分类问题以及数据驱动的方法。目录：
 
-- [����ͼ����ࡢ���������ķ�����`pipeline`](#intro)
-- [Nearest Neighbor Classifier](#nn)
-  - [k-Nearest Neighbor](#knn)
-- [Validation sets, Cross-validation, hyperparameter tuning](#val)
-- [Pros/Cons of Nearest Neighbor](#procon)
-- [Summary](#summary)
-- [Summary: Applying kNN in practice](#summaryapply)
-- [Further Reading](#reading)
+- [介绍图像分类、数据驱动的方法及`pipeline`](#intro)
+- [最近邻分类器](#nn)
+  - [k-最近邻](#knn)
+- [验证集、交叉验证、超参数调整](#val)
+- [最近邻分类的优缺点](#procon)
+- [概要](#summary)
+- [总结：在实践中应用kNN](#summaryapply)
+- [进一步阅读](#reading)
 
 <a name='intro'></a>
 
-## Image Classification
+## 图像分类
 
-**Motivation**. In this section we will introduce the Image Classification problem, which is the task of assigning an input image one label from a fixed set of categories. This is one of the core problems in Computer Vision that, despite its simplicity, has a large variety of practical applications. Moreover, as we will see later in the course, many other seemingly distinct Computer Vision tasks (such as object detection, segmentation) can be reduced to image classification.
+**动机**. 在本节中，我们将介绍图像分类问题，它是从一组固定的类别中为输入图像分配一个标签的任务。这是“计算机视觉”中的核心问题之一。尽管简单，却有着各种各样的实际应用。而且，正如我们后面将会看到的那样，许多其他看似不同的计算机视觉任务（如对象检测，分割）可以归结为图像分类。
 
-**Example**. For example, in the image below an image classification model takes a single image and assigns probabilities to 4 labels, *{cat, dog, hat, mug}*. As shown in the image, keep in mind that to a computer an image is represented as one large 3-dimensional array of numbers. In this example, the cat image is 248 pixels wide, 400 pixels tall, and has three color channels Red,Green,Blue (or RGB for short). Therefore, the image consists of 248 x 400 x 3 numbers, or a total of 297,600 numbers. Each number is an integer that ranges from 0 (black) to 255 (white). Our task is to turn this quarter of a million numbers into a single label, such as *"cat"*.
+**案例**. 例如，在下面的图像中，图像分类模型将获取单个图像，并将概率分配给4个标签`{cat，dog，hat，mug}`。如图所示，请记住，在计算机中，图像被表示为一个大的三维数字数组。在这个例子中，猫的图像是248像素宽，400像素高，并具有三个颜色通道，分布为红色、绿色\蓝色（或简称为RGB）。因此，图像由248 x 400 x 3个数字组成，或总共297,600个数字。每个数字是一个从0（黑色）到255（白色）的整数。我们的任务是将这个一百万个数字变成一个单一的标签，如“猫”。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/classify.png">
-  <div class="figcaption">The task in Image Classification is to predict a single label (or a distribution over labels as shown here to indicate our confidence) for a given image. Images are 3-dimensional arrays of integers from 0 to 255, of size Width x Height x 3. The 3 represents the three color channels Red, Green, Blue.</div>
+  <div class="figcaption">图像分类中的任务是预测给定图像的单个标签（如图所示，或者标签上的分布，以表示我们的置信度）。图像是从0到255的整数的三维数组，大小为宽×高×3。3代表三个颜色通道红，绿，蓝。</div>
 </div>
 
-**Challenges**. Since this task of recognizing a visual concept (e.g. cat) is relatively trivial for a human to perform, it is worth considering the challenges involved from the perspective of a Computer Vision algorithm. As we present (an inexhaustive) list of challenges below, keep in mind the raw representation of images as a 3-D array of brightness values:
+**挑战**. 由于识别视觉概念（例如猫）的任务对于人类来说是相对微不足道的，所以从计算机视觉算法的角度考虑所涉及的挑战是值得的。正如我们在下面提出的一个无穷无尽的挑战列表，请记住图像的原始表示形式作为亮度值的三维阵列：
 
-- **Viewpoint variation**. A single instance of an object can be oriented in many ways with respect to the camera.
-- **Scale variation**. Visual classes often exhibit variation in their size (size in the real world, not only in terms of their extent in the image).
-- **Deformation**. Many objects of interest are not rigid bodies and can be deformed in extreme ways.
-- **Occlusion**. The objects of interest can be occluded. Sometimes only a small portion of an object (as little as few pixels) could be visible.
-- **Illumination conditions**. The effects of illumination are drastic on the pixel level.
-- **Background clutter**. The objects of interest may *blend* into their environment, making them hard to identify.
-- **Intra-class variation**. The classes of interest can often be relatively broad, such as *chair*. There are many different types of these objects, each with their own appearance.
+- **角度变化**. 相对于相机，对象的单个实例可以以多种方式定向
+- **缩放变化**. 视觉物体通常在尺寸上有所不同（在现实世界中的尺寸，不仅仅是在图像范围上）
+- **变形**. 可将死板的对象以极端方式变形
+- **遮挡**. 感兴趣的对象可以被遮挡。有时只有一小部分对象（只有少数像素）可见
+- **照明条件**. 照明的效果在像素级上非常突出
+- **混淆背景**. 感兴趣的对象可能**融入**到他环境中，使他们很难辨认
+- **内部类型变化**. 感兴趣的物体通常可能比较宽泛，如椅子。这些对象有很多不同的类型，每个都有自己的外观
 
-A good image classification model must be invariant to the cross product of all these variations, while simultaneously retaining sensitivity to the inter-class variations.
+对于这些变化，一个好的图像分类模型必须是稳定的，同时保持对类间变化的敏感性。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/challenges.jpeg">
   <div class="figcaption"></div>
 </div>
 
-**Data-driven approach**. How might we go about writing an algorithm that can classify images into distinct categories? Unlike writing an algorithm for, for example, sorting a list of numbers, it is not obvious how one might write an algorithm for identifying cats in images. Therefore, instead of trying to specify what every one of the categories of interest look like directly in code, the approach that we will take is not unlike one you would take with a child: we're going to provide the computer with many examples of each class and then develop learning algorithms that look at these examples and learn about the visual appearance of each class. This approach is referred to as a *data-driven approach*, since it relies on first accumulating a *training dataset* of labeled images. Here is an example of what such a dataset might look like:
+**数据驱动的方法**. 我们怎样写一个算法，可以将图像分为不同的类别？与编写一个用于排序数字列表的算法不同，编写用于识别图像中的猫的算法并不明显。因此，我们不是直接在代码中指定每一个感兴趣的类别，而是采用带孩​​子一样的方法：我们将为计算机每个类提供很多例子，然后开发学习算法，通过观察这些例子，了解每个类的视觉外观。这种方法被称为数据驱动方法，因为它依赖于带标记的图像。数据集类似下图：
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/trainset.jpg">
-  <div class="figcaption">An example training set for four visual categories. In practice we may have thousands of categories and hundreds of thousands of images for each category.</div>
+  <div class="figcaption">一个示例训练集有四类。实际上，我们可能会有数千个类别和并为每类提供数十万个图像。</div>
 </div>
 
-**The image classification pipeline**. We've seen that the task in Image Classification is to take an array of pixels that represents a single image and assign a label to it. Our complete pipeline can be formalized as follows:
+**图像分类`pipeline`**. 我们已经看到，图像分类中的任务是获取表示单个图像的像素阵列并为其分配标签。我们完整的`pipeline`可以形式化如下：
 
-- **Input:** Our input consists of a set of *N* images, each labeled with one of *K* different classes. We refer to this data as the *training set*.
-- **Learning:** Our task is to use the training set to learn what every one of the classes looks like. We refer to this step as *training a classifier*, or *learning a model*.
-- **Evaluation:** In the end, we evaluate the quality of the classifier by asking it to predict labels for a new set of images that it has never seen before. We will then compare the true labels of these images to the ones predicted by the classifier. Intuitively, we're hoping that a lot of the predictions match up with the true answers  (which we call the *ground truth*).
+- **输入:** 我们的输入由一组*N*个图像组成，每个图像标记为*K*个不同类别中的一种。我们将这些数据称为*训练集*
+- **学习:** 我们的任务是使用*训练集*来学习每个类到底长什么样子。我们将这一步称为*训练分类器*，或者是*学习模型*
+- **评估:** 最后，我们评估分类器的质量，要求它预测一组以前从未见过的图像的标签。然后，我们将比较这些图像的真实标签和分类器预测的标签。直觉上，我们希望尽可能多的预测与真实答案（我们称之为*基本事实*）相匹配
 
 <a name='nn'></a>
 
