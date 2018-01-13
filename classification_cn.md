@@ -6,7 +6,7 @@ permalink: /classification/
 
 这是一个介绍性的讲座，旨在介绍从计算机视觉到图像分类问题以及数据驱动的方法。目录：
 
-- [Intro to Image Classification, data-driven approach, pipeline](#intro)
+- [介绍图像分类、数据驱动的方法及`pipeline`](#intro)
 - [Nearest Neighbor Classifier](#nn)
   - [k-Nearest Neighbor](#knn)
 - [Validation sets, Cross-validation, hyperparameter tuning](#val)
