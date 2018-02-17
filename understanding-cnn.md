@@ -7,13 +7,13 @@ permalink: /understanding-cnn/
 
 (this page is currently in draft form)
 
-## Visualizing what ConvNets learn
+## 显示`ConvNets`学习到的内容
 
-Several approaches for understanding and visualizing Convolutional Networks have been developed in the literature, partly as a response the common criticism that the learned features in a Neural Network are not interpretable. In this section we briefly survey some of these approaches and related work.
+在现代文献中，已经开发出了几种理解和显示卷积网络的方法，部分原因是回应神经网络中学习特征不可解释的常见批评。在本节中，我们将简要介绍一些这些方法和相关工作。
 
-### Visualizing the activations and first-layer weights
+### 可视化激活和第一层权重
 
-**Layer Activations**. The most straight-forward visualization technique is to show the activations of the network during the forward pass. For ReLU networks, the activations usually start out looking relatively blobby and dense, but as the training progresses the activations usually become more sparse and localized. One dangerous pitfall that can be easily noticed with this visualization is that some activation maps may be all zero for many different inputs, which can indicate *dead* filters, and can be a symptom of high learning rates.
+**图层激活**. 最直接的可视化技术是在正向传播期间显示网络的激活。对于`ReLU`网络来说，激活通常开始看起来相对比较臃肿和密集，但随着训练的进行，激活通常变得更加稀疏和局部集中。使用可视化很容易观察到一个危险的陷阱是，对于许多不同的输入，某些些激活映射可能全为零，这表明过滤器**死亡**，这正是过高学习速率的症状。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/act1.jpeg" width="49%">
