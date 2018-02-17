@@ -19,7 +19,7 @@ permalink: /understanding-cnn/
   <img src="/assets/cnnvis/act1.jpeg" width="49%">
   <img src="/assets/cnnvis/act2.jpeg" width="49%">
   <div class="figcaption">
-    Typical-looking activations on the first CONV layer (left), and the 5th CONV layer (right) of a trained AlexNet looking at a picture of a cat. Every box shows an activation map corresponding to some filter. Notice that the activations are sparse (most values are zero, in this visualization shown in black) and mostly local.
+    Typical-looking activations on the first CONV layer (left), and the 5th CONV layer (right) of a trained AlexNet looking at a picture of a cat. Every box shows an activation map corresponding to some filter. Notice that the activations are sparse (most values are zero, in this visualization shown in black) and mostly local.识别猫的第一个卷积激活（左）图形和已经训练过的`AlexNet`模型第五层（右）。每个框都显示一个对应于某个过滤器的激活图。请注意，激活是稀疏的（大多数值为零，可视化显示为黑色），大多本地集中。
   </div>
 </div>
 
