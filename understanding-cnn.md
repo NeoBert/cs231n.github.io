@@ -6,7 +6,7 @@ permalink: /understanding-cnn/
 <a name='vis'></a>
 
 (this page is currently in draft form)
-## 显示`ConvNets`学习到的内容
+## 显示`ConvNets`学习的结果
 
 在现代文献中，已经开发出了几种理解和显示卷积网络的方法，部分原因是回应神经网络中学习特征不可解释的常见批评。在本节中，我们将简要介绍一些这些方法和相关工作。
 
