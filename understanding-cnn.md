@@ -50,18 +50,18 @@ permalink: /understanding-cnn/
 
 ConvNets可以被解释为逐渐将图像转换为一种表达，在其中类可以通过线性分类器分离。通过将图像嵌入到两维中，我们可以粗略地了解这个空间的拓扑结构，以使它们的低维表示具有与它们的高维表示大致相等的距离。有许多嵌入方法是直接将高维矢量嵌入低维空间，同时保留点的成对距离。其中，[t-SNE](http://lvdmaaten.github.io/tsne/) 是产生视觉上令人满意的结果的最着名的方法之一。
 
-为了产生嵌入，我们可以采用一组图像，并使用ConvNet来提取CNN代码（例如，在AlexNet中，即在分类器之前的4096维矢量中，并且关键地包括ReLU非线性）。然后，我们可以将这些插入到t-SNE中，并为每个图像获取二维矢量。相应的图像可以在网格中可视化：
+为了产生嵌入，我们可以采用一组图像，并使用ConvNet提取CNN代码（例如，在AlexNet中，即在分类器之前的4096维矢量中，包括ReLU非线性至关重要）。然后，我们可以将这些插入到t-SNE中，并为每个图像获取二维矢量。相应的图像可以在网格中可视化：
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/tsne.jpeg" width="100%">
   <div class="figcaption">
-    t-SNE embedding of a set of images based on their CNN codes. Images that are nearby each other are also close in the CNN representation space, which implies that the CNN "sees" them as being very similar. Notice that the similarities are more often class-based and semantic rather than pixel and color-based. For more details on how this visualization was produced the associated code, and more related visualizations at different scales refer to <a href="http://cs.stanford.edu/people/karpathy/cnnembed/">t-SNE visualization of CNN codes</a>.
+    基于CNN代码的一组图像的t-SNE嵌入。彼此相邻的图像在CNN表示空间也很接近，这意味着CNN"看"它们非常相似。请注意，相似性通常是基于类和语义的，而不是基于像素和颜色。有关如何生成此可视化的更多详细信息，相关代码以及不同尺度下的更多相关可视化请参考<a href="http://cs.stanford.edu/people/karpathy/cnnembed/">`CNN`代码的`t-SNE`可视化</a>.
   </div>
 </div>
 
-### Occluding parts of the image
+### 遮挡图像的一部分
 
-Suppose that a ConvNet classifies an image as a dog. How can we be certain that it's actually picking up on the dog in the image as opposed to some contextual cues from the background or some other miscellaneous object? One way of investigating which part of the image some classification prediction is coming from is by plotting the probability of the class of interest (e.g. dog class) as a function of the position of an occluder object. That is, we iterate over regions of the image, set a patch of the image to be all zero, and look at the probability of the class. We can visualize the probability as a 2-dimensional heat map. This approach has been used in Matthew Zeiler's [Visualizing and Understanding Convolutional Networks](http://arxiv.org/abs/1311.2901):
+假设ConvNet将图像分类为狗。我们怎样才能确定它实际上是在图像中对狗进行拾取，而不是从背景或其他杂项对象中提取一些背景线索？一种调查图像分类预测究竟来自图像的哪一部分的方法是将感兴趣的类别（例如，狗类）的概率绘制为遮挡物对象的位置函数。也就是说，我们遍历图像的各个区域，将图像的一个片段设置为零，然后查看该类别的概率。我们可以将概率可视化为二维热图。这种方法应用于Matthew Zeiler的[可视化和理解卷积网络](http://arxiv.org/abs/1311.2901):
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/occlude.jpeg" width="100%">
