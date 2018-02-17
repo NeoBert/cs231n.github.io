@@ -6,7 +6,6 @@ permalink: /understanding-cnn/
 <a name='vis'></a>
 
 (this page is currently in draft form)
-
 ## 显示`ConvNets`学习到的内容
 
 在现代文献中，已经开发出了几种理解和显示卷积网络的方法，部分原因是回应神经网络中学习特征不可解释的常见批评。在本节中，我们将简要介绍一些这些方法和相关工作。
@@ -23,7 +22,7 @@ permalink: /understanding-cnn/
   </div>
 </div>
 
-**Conv / FC过滤器.** 第二种常用策略是将权重可视化。这些通常在第一个直接关注原始像素数据的CONV层上最易解释，但也可以在网络中更深地显示滤波器权重。权重对于可视化很有用，因为更好训练的网络通常会显示漂亮而平滑的过滤器，而不会出现任何噪音模式。噪声模式意味着网络可能未经过足够长时间训练网络，或者可能正则化强度低导致过度拟合。
+**Conv / FC过滤器.** 第二种常用策略是将权重可视化。这些通常在第一个直接关注原始像素数据的CONV层上最易解释，但也可以在网络中更深地显示滤波器权重。权重对于可视化很有用，因为更好训练的网络通常会显示漂亮而平滑的过滤器，而不会出现任何噪音模式。噪声意味着网络可能未经足够长时间训练，或者正则化强度低可能导致过度拟合。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/filt1.jpeg" width="49%">
@@ -66,40 +65,40 @@ ConvNets可以被解释为逐渐将图像转换为一种表达，在其中类可
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/occlude.jpeg" width="100%">
   <div class="figcaption">
-    Three input images (top). Notice that the occluder region is shown in grey. As we slide the occluder over the image we record the probability of the correct class and then visualize it as a heatmap (shown below each image). For instance, in the left-most image we see that the probability of Pomeranian plummets when the occluder covers the face of the dog, giving us some level of confidence that the dog's face is primarily responsible for the high classification score. Conversely, zeroing out other parts of the image is seen to have relatively negligible impact.
+    三个输入图像（顶部）。请注意，遮盖区域显示为灰色。当我们在图像上滑动遮挡物时，我们记录了正确类的概率，然后将其可视化为热图（在每个图像下面显示）。例如，在最左侧的图像中，我们看到，当封堵器覆盖狗的脸部时，分类为博美犬的可能性直线下降，这提示我们，即狗的脸部承担了类评分的主要责任。相反，遮盖图像的其他部分只有轻微影响。
   </div>
 </div>
 
-### Visualizing the data gradient and friends
+### 可视化数据梯度和类似部分
 
-**Data Gradient**.
+**数据梯度**.
 
-[Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps](http://arxiv.org/abs/1312.6034)
+[深层卷积网络：可视化图像分类模型和显着性映射](http://arxiv.org/abs/1312.6034)
 
 **DeconvNet**.
 
-[Visualizing and Understanding Convolutional Networks](http://arxiv.org/abs/1311.2901)
+[可视化和理解卷积网络](http://arxiv.org/abs/1311.2901)
 
-**Guided Backpropagation**.
+**引导式反向传播**.
 
-[Striving for Simplicity: The All Convolutional Net](http://arxiv.org/abs/1412.6806)
+[争取简单：所有卷积网络](http://arxiv.org/abs/1412.6806)
 
-### Reconstructing original images based on CNN Codes
+### 基于CNN编码重建原始图像
 
-[Understanding Deep Image Representations by Inverting Them](http://arxiv.org/abs/1412.0035)
+[通过反转理解深度图像表示](http://arxiv.org/abs/1412.0035)
 
-### How much spatial information is preserved?
+### 多少空间信息被保存？
 
-[Do ConvNets Learn Correspondence?](http://papers.nips.cc/paper/5420-do-convnets-learn-correspondence.pdf) (tldr: yes)
+[ConvNets能进行相应学习吗？](http://papers.nips.cc/paper/5420-do-convnets-learn-correspondence.pdf) (tldr: yes)
 
-### Plotting performance as a function of image attributes
+### 使用图像属性函数绘制性能
 
-[ImageNet Large Scale Visual Recognition Challenge](http://arxiv.org/abs/1409.0575)
+[ImageNet大规模视觉识别挑战](http://arxiv.org/abs/1409.0575)
 
-## Fooling ConvNets
+## 愚弄ConvNets
 
-[Explaining and Harnessing Adversarial Examples](http://arxiv.org/abs/1412.6572)
+[解释和利用对抗性例子](http://arxiv.org/abs/1412.6572)
 
-## Comparing ConvNets to Human labelers
+## 将ConvNets与人类标注相比较
 
-[What I learned from competing against a ConvNet on ImageNet](http://karpathy.github.io/2014/09/02/what-i-learned-from-competing-against-a-convnet-on-imagenet/)
+[我从ImageNet上的ConvNet竞赛中学到了什么](http://karpathy.github.io/2014/09/02/what-i-learned-from-competing-against-a-convnet-on-imagenet/)
