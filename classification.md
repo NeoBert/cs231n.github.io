@@ -21,11 +21,11 @@ permalink: /classification/
 
 **动机**. 在本节中，我们将介绍图像分类问题，它是从一组固定的类别中为输入图像分配一个标签的任务。这是计算机视觉中的核心问题之一，尽管它很简单，但却有各种各样的实际应用。而且，正如我们在课程后面将会看到的，许多其他看似不同的计算机视觉任务（如对象检测，分割）可以简化为图像分类。
 
-**案例**. 例如，在下面的图像中，图像分类模型会选取单一图像，并将概率分配给4个标签， *{猫，狗，帽子，马克杯}*，如图所示。请记住，对于计算机，图像被表示为一个大的三维数字数组。在这个例子中，猫的图像其宽为248像素，高为400像素，且有三个颜色通道。红色，绿色，蓝色（简称RGB）。因此，图像由248 x 400 x 3个数字组成，或总共297,600个数字。每个数字是一个整数，范围从0（黑色）到255（白色）。我们的任务是一百万个数字转换为单个标签，例如**猫**。
+**案例**. 例如，在下面的图像中，图像分类模型会选取单一图像，并将概率分配给4个标签， **{猫，狗，帽子，马克杯}**，如图所示。请记住，对于计算机，图像被表示为一个大的三维数字数组。在这个例子中，猫的图像其宽为248像素，高为400像素，且有三个颜色通道。红色，绿色，蓝色（简称RGB）。因此，图像由248 x 400 x 3个数字组成，或总共297,600个数字。每个数字是一个整数，范围从0（黑色）到255（白色）。我们的任务是一百万个数字转换为单个标签，例如**猫**。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/classify.png">
-  <div class="figcaption">The task in Image Classification is to predict a single label (or a distribution over labels as shown here to indicate our confidence) for a given image. Images are 3-dimensional arrays of integers from 0 to 255, of size Width x Height x 3. The 3 represents the three color channels Red, Green, Blue.</div>
+  <div class="figcaption">图像分类中的任务是预测给定图像的单个标签（或标签上的分布，如图所示，以表示我们的置信度）。图像是从0到255的整数的三维数组，大小为宽x高x 3，3代表三个颜色通道红色，绿色和蓝色。</div>
 </div>
 
 **Challenges**. Since this task of recognizing a visual concept (e.g. cat) is relatively trivial for a human to perform, it is worth considering the challenges involved from the perspective of a Computer Vision algorithm. As we present (an inexhaustive) list of challenges below, keep in mind the raw representation of images as a 3-D array of brightness values:
