@@ -6,14 +6,14 @@ permalink: /classification/
 
 这是一个介绍性讲座，旨在介绍计算机视觉中有关图像分类问题以及数据驱动方法。目录:
 
-- [Intro to Image Classification, data-driven approach, pipeline](#intro)
-- [Nearest Neighbor Classifier](#nn)
-  - [k-Nearest Neighbor](#knn)
-- [Validation sets, Cross-validation, hyperparameter tuning](#val)
-- [Pros/Cons of Nearest Neighbor](#procon)
-- [Summary](#summary)
-- [Summary: Applying kNN in practice](#summaryapply)
-- [Further Reading](#reading)
+- [介绍图像分类，数据驱动方法，流水线](#intro)
+- [最近邻分类器](#nn)
+  - [k-最近邻](#knn)
+- [验证集，交叉验证，超参数调整](#val)
+- [最近邻分类的优点/缺点](#procon)
+- [总结](#summary)
+- [总结：应用`kNN`](#summaryapply)
+- [进一步阅读](#reading)
 
 <a name='intro'></a>
 
