@@ -4,7 +4,7 @@ mathjax: true
 permalink: /classification/
 ---
 
-This is an introductory lecture designed to introduce people from outside of Computer Vision to the Image Classification problem, and the data-driven approach. The Table of Contents:
+这是一个介绍性讲座，旨在介绍计算机视觉中有关图像分类问题以及数据驱动方法。目录:
 
 - [Intro to Image Classification, data-driven approach, pipeline](#intro)
 - [Nearest Neighbor Classifier](#nn)
