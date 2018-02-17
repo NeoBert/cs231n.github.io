@@ -19,38 +19,38 @@ permalink: /understanding-cnn/
   <img src="/assets/cnnvis/act1.jpeg" width="49%">
   <img src="/assets/cnnvis/act2.jpeg" width="49%">
   <div class="figcaption">
-    Typical-looking activations on the first CONV layer (left), and the 5th CONV layer (right) of a trained AlexNet looking at a picture of a cat. Every box shows an activation map corresponding to some filter. Notice that the activations are sparse (most values are zero, in this visualization shown in black) and mostly local.识别猫的第一个卷积激活（左）图形和已经训练过的`AlexNet`模型第五层（右）。每个框都显示一个对应于某个过滤器的激活图。请注意，激活是稀疏的（大多数值为零，可视化显示为黑色），大多本地集中。
+    识别猫的第一个卷积激活（左）图形和已经训练过的`AlexNet`模型第五层（右）。每个框都显示一个对应于某个过滤器的激活图。请注意，激活是稀疏的（大多数值为零，可视化显示为黑色），大多本地集中。
   </div>
 </div>
 
-**Conv/FC Filters.** The second common strategy is to visualize the weights. These are usually most interpretable on the first CONV layer which is looking directly at the raw pixel data, but it is possible to also show the filter weights deeper in the network. The weights are useful to visualize because well-trained networks usually display nice and smooth filters without any noisy patterns. Noisy patterns can be an indicator of a network that hasn't been trained for long enough, or possibly a very low regularization strength that may have led to overfitting.
+**Conv / FC过滤器.** 第二种常用策略是将权重可视化。这些通常在第一个直接关注原始像素数据的CONV层上最易解释，但也可以在网络中更深地显示滤波器权重。权重对于可视化很有用，因为更好训练的网络通常会显示漂亮而平滑的过滤器，而不会出现任何噪音模式。噪声模式意味着网络可能未经过足够长时间训练网络，或者可能正则化强度低导致过度拟合。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/filt1.jpeg" width="49%">
   <img src="/assets/cnnvis/filt2.jpeg" width="49%">
   <div class="figcaption">
-    Typical-looking filters on the first CONV layer (left), and the 2nd CONV layer (right) of a trained AlexNet. Notice that the first-layer weights are very nice and smooth, indicating nicely converged network. The color/grayscale features are clustered because the AlexNet contains two separate streams of processing, and an apparent consequence of this architecture is that one stream develops high-frequency grayscale features and the other low-frequency color features. The 2nd CONV layer weights are not as interpretable, but it is apparent that they are still smooth, well-formed, and absent of noisy patterns.
+    第一个CONV层上的典型外观滤波器（左）以及良好训练的AlexNet的第二个CONV层（右）。请注意，第一层权重非常平滑，表明融合网络很好。由于AlexNet包含两个独立的处理流，所以颜色/灰度特征是聚类的，这种体系结构的明显结果是一个流开发高频灰度特征和其他低频彩色特征。第二个CONV层的权重不是可以解释的，但很明显，他们仍然是平滑的，格式良好的，并且没有噪音模式。
   </div>
 </div>
 
-### Retrieving images that maximally activate a neuron
+### 检索最大程度地激活神经元的图像
 
-Another visualization technique is to take a large dataset of images, feed them through the network and keep track of which images maximally activate some neuron. We can then visualize the images to get an understanding of what the neuron is looking for in its receptive field. One such visualization (among others) is shown in [Rich feature hierarchies for accurate object detection and semantic segmentation](http://arxiv.org/abs/1311.2524) by Ross Girshick et al.:
+另一种可视化技术是采集大量图像数据集，通过网络馈送它们并跟踪哪些图像最大程度地激活某个神经元。然后，我们可以将图像可视化，以了解神经元在其感受野中寻找的内容。一个案例参见Rich Girshick等人[在丰富的特征层次结构中精确的对象检测和语义分割](http://arxiv.org/abs/1311.2524)。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/pool5max.jpeg" width="100%">
   <div class="figcaption">
-    Maximally activating images for some POOL5 (5th pool layer) neurons of an AlexNet. The activation values and the receptive field of the particular neuron are shown in white. (In particular, note that the POOL5 neurons are a function of a relatively large portion of the input image!) It can be seen that some neurons are responsive to upper bodies, text, or specular highlights.
+    最大限度地激活AlexNet的某些POOL5（第5个池层）神经元的图像。白色显示特定神经元的激活值和感受野。（尤其要注意的是，POOL5神经元是输入图像相对较大部分的函数！）可以看出，一些神经元对上半身，文本或镜面高光敏感。
   </div>
 </div>
 
-One problem with this approach is that ReLU neurons do not necessarily have any semantic meaning by themselves. Rather, it is more appropriate to think of multiple ReLU neurons as the basis vectors of some space that represents in image patches. In other words, the visualization is showing the patches at the edge of the cloud of representations, along the (arbitrary) axes that correspond to the filter weights. This can also be seen by the fact that neurons in a ConvNet operate linearly over the input space, so any arbitrary rotation of that space is a no-op. This point was further argued in [Intriguing properties of neural networks](http://arxiv.org/abs/1312.6199) by Szegedy et al., where they perform a similar visualization along arbitrary directions in the representation space.
+这种方法的一个问题是，ReLU神经元本身不一定具有任何语义含义。相反，将多个ReLU神经元想象成图像块中表示的某些空间的基本向量是更合适的。换句话说，可视化显示沿着与过滤器权重相对应的（任意）轴的表示云表面边缘的补丁。这也可以通过ConvNet中的神经元在输入空间上线性运行的事实来看到，因此该空间的任意旋转是无操作的。Szegedy等人在[神经网络的Intriguing特性](http://arxiv.org/abs/1312.6199)中进一步论证了这一点，他们沿着表示空间中的任意方向执行类似的可视化。
 
-### Embedding the codes with t-SNE 
+### 使用`t-SNE`嵌入代码
 
-ConvNets can be interpreted as gradually transforming the images into a representation in which the classes are separable by a linear classifier. We can get a rough idea about the topology of this space by embedding images into two dimensions so that their low-dimensional representation has approximately equal distances than their high-dimensional representation. There are many embedding methods that have been developed with the intuition of embedding high-dimensional vectors in a low-dimensional space while preserving the pairwise distances of the points. Among these, [t-SNE](http://lvdmaaten.github.io/tsne/) is one of the best-known methods that consistently produces visually-pleasing results.
+ConvNets可以被解释为逐渐将图像转换为一种表达，在其中类可以通过线性分类器分离。通过将图像嵌入到两维中，我们可以粗略地了解这个空间的拓扑结构，以使它们的低维表示具有与它们的高维表示大致相等的距离。有许多嵌入方法是直接将高维矢量嵌入低维空间，同时保留点的成对距离。其中，[t-SNE](http://lvdmaaten.github.io/tsne/) 是产生视觉上令人满意的结果的最着名的方法之一。
 
-To produce an embedding, we can take a set of images and use the ConvNet to extract the CNN codes (e.g. in AlexNet the 4096-dimensional vector right before the classifier, and crucially, including the ReLU non-linearity). We can then plug these into t-SNE and get 2-dimensional vector for each image. The corresponding images can them be visualized in a grid:
+为了产生嵌入，我们可以采用一组图像，并使用ConvNet来提取CNN代码（例如，在AlexNet中，即在分类器之前的4096维矢量中，并且关键地包括ReLU非线性）。然后，我们可以将这些插入到t-SNE中，并为每个图像获取二维矢量。相应的图像可以在网格中可视化：
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/cnnvis/tsne.jpeg" width="100%">
