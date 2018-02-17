@@ -17,11 +17,11 @@ permalink: /classification/
 
 <a name='intro'></a>
 
-## Image Classification
+## 图像分类
 
-**Motivation**. In this section we will introduce the Image Classification problem, which is the task of assigning an input image one label from a fixed set of categories. This is one of the core problems in Computer Vision that, despite its simplicity, has a large variety of practical applications. Moreover, as we will see later in the course, many other seemingly distinct Computer Vision tasks (such as object detection, segmentation) can be reduced to image classification.
+**动机**. 在本节中，我们将介绍图像分类问题，它是从一组固定的类别中为输入图像分配一个标签的任务。这是计算机视觉中的核心问题之一，尽管它很简单，但却有各种各样的实际应用。而且，正如我们在课程后面将会看到的，许多其他看似不同的计算机视觉任务（如对象检测，分割）可以简化为图像分类。
 
-**Example**. For example, in the image below an image classification model takes a single image and assigns probabilities to 4 labels, *{cat, dog, hat, mug}*. As shown in the image, keep in mind that to a computer an image is represented as one large 3-dimensional array of numbers. In this example, the cat image is 248 pixels wide, 400 pixels tall, and has three color channels Red,Green,Blue (or RGB for short). Therefore, the image consists of 248 x 400 x 3 numbers, or a total of 297,600 numbers. Each number is an integer that ranges from 0 (black) to 255 (white). Our task is to turn this quarter of a million numbers into a single label, such as *"cat"*.
+**案例**. 例如，在下面的图像中，图像分类模型会选取单一图像，并将概率分配给4个标签， *{猫，狗，帽子，马克杯}*，如图所示。请记住，对于计算机，图像被表示为一个大的三维数字数组。在这个例子中，猫的图像其宽为248像素，高为400像素，且有三个颜色通道。红色，绿色，蓝色（简称RGB）。因此，图像由248 x 400 x 3个数字组成，或总共297,600个数字。每个数字是一个整数，范围从0（黑色）到255（白色）。我们的任务是一百万个数字转换为单个标签，例如**猫**。
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/classify.png">
